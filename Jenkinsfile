@@ -14,13 +14,13 @@ pipeline {
   }
 
   stages {
-    stage('Clone') {
-      steps {
-        git url: 'https://github.com/pavan931/jenkins-docker-build.git',
-            branch: "${params.Branch}",
-            credentialsId: 'git-creds'
-      }
-    }
+    // stage('Clone') {
+    //   steps {
+    //     git url: 'https://github.com/pavan931/jenkins-docker-build.git',
+    //         branch: "${params.Branch}",
+    //         credentialsId: 'git-creds'
+    //   }
+    // }
 
    stage('Login to AWS ECR') {
   steps {
@@ -30,7 +30,7 @@ pipeline {
   passwordVariable: 'AWS_SECRET_ACCESS_KEY'
 )]) {
   sh '''
-    apt update && apt install -y awscli
+    
     aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
     aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     aws configure set region ap-south-1
